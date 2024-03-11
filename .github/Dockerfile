@@ -10,8 +10,14 @@ COPY . /app
 # Install poetry
 RUN pip install poetry
 
+# Sync poetry.lock and pyproject.toml
+RUN poetry lock --no-update
+
 # Install project dependencies
-RUN poetry install
+RUN poetry install --with dev,vis
+
+# Run tests
+RUN poetry run pytest
 
 # Set the default command to run when starting a container to bash shell
 CMD ["bash"]
