@@ -80,7 +80,7 @@ segment:
       - [-7_503_000,  -7_503_000,   -7_503_000,   -7_503_000,   -7_503_000  ]
       - [-35_000_000, -35_000_000,  -35_000_000,  -35_000_000,  -42_000_000 ]
     budget_year_per_segment: 300_000
-    budget_penalty: 0.2
+    budget_penalty: 0.5
     budget_horizon: 5
 
   traffic:
@@ -88,7 +88,7 @@ segment:
       type: "list"
       # Shape: A 
       # [do-nothing, inspect, minor-repair, major-repair, replacement]
-      list: [1.0000, 1.0000, 1.0000, 1.0000, 1.3333]
+      list: [1.0000, 1.0000, 1.161616, 1.161616, 1.3333]
 
     capacity_factors:
       type: "list"
@@ -101,8 +101,8 @@ edge:
     bpr_alpha: 0.15
     bpr_beta: 4.0
   reward:
-    campaign_reward: [0, -2_000, -20_030, -75_030, -350_000]
+    campaign_reward: [0, -50_000, -2_000_000, -5_000_000, -6_000_000]
 network:
   travel_time:
-    reward_factor: -1.0
-    exponential_factor: 4.0
+    reward_factor: -800_000_000.0
+    exponential_factor: 1.0

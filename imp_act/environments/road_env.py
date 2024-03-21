@@ -356,6 +356,7 @@ class RoadEnvironment:
 
     def get_travel_time_reward(self, total_travel_time):
         normalized_delay = total_travel_time / self.base_total_travel_time
+        self.normalized_delay = normalized_delay
         exponential_delay = normalized_delay**self.travel_time_exponential
         clipped_relative_exponential_delay = np.max((exponential_delay - 1), 0)
 
@@ -392,6 +393,7 @@ class RoadEnvironment:
             "travel_times": self.graph.es["travel_time"],
             "volumes": self.graph.es["volume"],
             "reward_elements": [travel_time_reward, maintenance_reward],
+            "normalized_delay": self.normalized_delay,
         }
 
         return observation, reward, self.timestep >= self.max_timesteps, info
