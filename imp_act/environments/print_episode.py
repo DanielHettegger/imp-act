@@ -81,11 +81,16 @@ def main(args):
         print(f"remaining budget time: {obs['remaining_budget_years']}")
         print(f"normalized delay: {info['normalized_delay']:.5f}")
 
-        max_util = max([max(util) for util in obs["edge_traffic_utilization"]])
-        mean_util = np.mean([np.mean(util) for util in obs["edge_traffic_utilization"]])
-        print(f"max utilization: {max_util:.2f}")
-        print(f"mean utilization: {mean_util:.2f}")
+        flattended_utilizations = [util for edge_util in obs["edge_traffic_utilization"] for util in edge_util]
 
+        max_util = np.max(flattended_utilizations)
+        min_util = np.min(flattended_utilizations)
+        avg_util = np.mean(flattended_utilizations)
+        std_util = np.std(flattended_utilizations)
+
+        print(f"Utilization: avg: {avg_util:.2f}, std: {std_util:.2f}, max: {max_util:.2f}, min: {min_util:.2f}")
+        
+        
         if args.print_segment_info:
             for i, observations, beliefs, states, util in zip(
                 range(len(obs["edge_observations"])),
