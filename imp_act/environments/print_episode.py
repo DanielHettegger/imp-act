@@ -56,6 +56,8 @@ def main():
         print(f"travel_time_reward: {info['reward_elements'][0]:.2e}")
         print(f"maintenance_reward: {info['reward_elements'][1]:.2e}")
         print(f"total travel time: {info['total_travel_time']}")
+        print(f"remaining budget: {obs['remaining_budget']:.2e}")
+        print(f"remaining budget time: {obs['remaining_budget_years']}")
 
         """for i, observations, beliefs, states in zip(
             range(len(observation["edge_observations"])),
