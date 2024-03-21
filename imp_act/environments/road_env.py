@@ -242,6 +242,8 @@ class RoadEnvironment:
             "exponential_factor"
         ]
 
+        self.base_total_travel_time = self._get_total_travel_time()
+
         budget_year_per_segment = config["model"]["segment"]["reward"][
             "budget_year_per_segment"
         ]
@@ -252,8 +254,7 @@ class RoadEnvironment:
         )
         self.count_budget_horizon = 0
         self.tot_expenses = 0
-
-        self.base_total_travel_time = self._get_total_travel_time()
+        
 
         self.reset(reset_edges=False)
 
@@ -269,16 +270,23 @@ class RoadEnvironment:
         edge_observations = []
         edge_nodes = []
         edge_beliefs = []
+        edge_traffic_utilization = []
         for edge in self.graph.es:
             edge_observations.append(edge["road_segments"].get_observation())
             edge_beliefs.append(edge["road_segments"].get_beliefs())
             edge_nodes.append([edge.source, edge.target])
+            volume = edge["volume"]
+            utilization = [
+                volume / segment.capacity for segment in edge["road_segments"].segments
+            ]
+            edge_traffic_utilization.append(utilization)
 
         observations = {
             "adjacency_matrix": adjacency_matrix,
             "edge_observations": edge_observations,
             "edge_beliefs": edge_beliefs,
             "edge_nodes": edge_nodes,
+            "edge_traffic_utilization": edge_traffic_utilization,
             "time_step": self.timestep,
             "remaining_budget": self.budget - self.tot_expenses,
             "remaining_budget_years": self.budget_horizon - self.count_budget_horizon,
