@@ -393,7 +393,6 @@ WARN_LIMIT_RATIO = 2
 FAIL_LIMIT_RATIO = 3
 
 
-@pytest.mark.skip(reason="Waiting for final calibration of the environment")
 @pytest.mark.parametrize(
     "parameter_fixture",
     ["toy_environment", "small_environment", "medium_environment", "large_environment"],

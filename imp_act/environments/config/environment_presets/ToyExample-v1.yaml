@@ -48,16 +48,16 @@ network:
     list:
       - origin: 0
         destination: 1
-        volume: 75
+        volume: 50
       - origin: 1
         destination: 3
-        volume: 75
+        volume: 50
       - origin: 2
         destination: 0
-        volume: 75
+        volume: 50
       - origin: 3
         destination: 2
-        volume: 75
+        volume: 50
   segments: 
     type: "list"
     list:
